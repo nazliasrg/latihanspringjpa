@@ -5,7 +5,6 @@ import com.nazli.latihanspringjpa.model.dto.PersonDto;
 import com.nazli.latihanspringjpa.model.dto.StatusMessageDto;
 import com.nazli.latihanspringjpa.model.dto.UserDto;
 import com.nazli.latihanspringjpa.model.entity.DomisiliEntity;
-import com.nazli.latihanspringjpa.model.entity.PersonEntity;
 import com.nazli.latihanspringjpa.model.entity.UserEntity;
 import com.nazli.latihanspringjpa.repository.DetailUserRepository;
 import com.nazli.latihanspringjpa.repository.DomisiliRepository;
@@ -66,7 +65,7 @@ public class UserController {
     public ResponseEntity<?> updateUserEntity(@PathVariable Integer id, @RequestBody PersonDto personDto){
         StatusMessageDto<UserEntity> result = new StatusMessageDto<>();
         try{
-            return userService.updateUserEntity(personDto);
+            return userService.updateUserEntity(id, personDto);
         }catch (Exception e){
             result.setMessage(e.getMessage());
             return ResponseEntity.badRequest().body(result);

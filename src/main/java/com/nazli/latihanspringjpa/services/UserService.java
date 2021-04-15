@@ -5,5 +5,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface UserService {
     ResponseEntity<?> registUserData(PersonDto personDto);
-    ResponseEntity<?> updateUserEntity(PersonDto personDto);
+    ResponseEntity<?> updateUserEntity(Integer id, PersonDto personDto);
 }

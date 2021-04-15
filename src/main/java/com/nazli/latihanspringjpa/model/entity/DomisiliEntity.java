@@ -35,7 +35,7 @@ public class DomisiliEntity {
     @Column(length = 11)
     private Integer status;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "idDetailUser")
     private DetailUserEntity detailUser;
 

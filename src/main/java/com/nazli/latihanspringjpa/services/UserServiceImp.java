@@ -56,21 +56,16 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public ResponseEntity<?> updateUserEntity(PersonDto personDto) {
+    public ResponseEntity<?> updateUserEntity(Integer id, PersonDto personDto) {
         StatusMessageDto<UserEntity> result = new StatusMessageDto<>();
-        if(personDto.getNik().length() != 16){
-            result.setStatus(HttpStatus.BAD_REQUEST.value());
-            result.setMessage("NIK harus berjumlah 16 angka");
-            return ResponseEntity.badRequest().body(result);
-        }
 
-        UserEntity user = new UserEntity();
-        DetailUserEntity detailUser = new DetailUserEntity();
+        UserEntity user = userRepository.findById(id).get();
+        DetailUserEntity detailUser = detailUserRepository.findByUserEntityId(id);
 
-        if(personDto.getUsername().isEmpty() == false){
+        if(personDto.getUsername() != null){
             user.setUsername(personDto.getUsername());
         }
-        if(personDto.getPassword().isEmpty() == false){
+        if(personDto.getPassword() != null){
             user.setPassword(personDto.getPassword());
         }
         if(personDto.getStatus() != null){
@@ -78,22 +73,22 @@ public class UserServiceImp implements UserService{
         }
         userRepository.save(user);
 
-        if(personDto.getFirstName().isEmpty() == false){
+        if(personDto.getFirstName() != null){
             detailUser.setFirstName(personDto.getFirstName());
         }
-        if(personDto.getLastName().isEmpty() == false){
+        if(personDto.getLastName() != null){
             detailUser.setLastName(personDto.getLastName());
         }
-        if(personDto.getNik().isEmpty() == false){
+        if(personDto.getNik() != null){
             detailUser.setNik(personDto.getNik());
         }
         if(personDto.getTanggalLahir() != null){
             detailUser.setTanggalLahir(personDto.getTanggalLahir());
         }
-        if(personDto.getGolDarah().isEmpty() == false){
+        if(personDto.getGolDarah() != null){
             detailUser.setGolDarah(personDto.getGolDarah());
         }
-        if(personDto.getNoHp().isEmpty() == false){
+        if(personDto.getNoHp() != null){
             detailUser.setNoHp(personDto.getNoHp());
         }
         detailUser.setUser(user);
