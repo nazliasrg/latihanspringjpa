@@ -45,6 +45,7 @@ public class UserServiceImp implements UserService{
         detailUser.setTanggalLahir(personDto.getTanggalLahir());
         detailUser.setGolDarah(personDto.getGolDarah());
         detailUser.setNoHp(personDto.getNoHp());
+
         detailUser.setUser(user);
         detailUserRepository.save(detailUser);
 
